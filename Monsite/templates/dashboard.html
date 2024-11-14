@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{% block content %}
+<div class="container">
+  <h2>Mon Tableau de Bord</h2>
+
+  <h3>Investissements</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Niveau</th>
+        <th>Montant</th>
+        <th>Date de dépôt</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for investissement in investissements %}
+      <tr>
+        <td>{{ investissement.niveau.nom }}</td>
+        <td>{{ investissement.montant }} FCFA</td>
+        <td>{{ investissement.date_depot }}</td>
+        <td>{{ investissement.actif|yesno:"Actif,Inactif" }}</td>
+        <td>
+          <a href="{% url 'Monsite:creer_transaction' investissement.id %}" class="btn btn-sm btn-info">Faire un dépôt</a>
+          <a href="{% url 'Monsite:retirer_fonds' investissement.id %}" class="btn btn-sm btn-warning">Retirer</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Parrainages</h3>
+  <p>Vous avez parrainé {{ parrainages.count }} utilisateurs.</p>
+
+  <h3>Transactions</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in transactions %}
+      <tr>
+        <td>{{ transaction.date }}</td>
+        <td>{{ transaction.type_transaction }}</td>
+        <td>{{ transaction.montant }} FCFA</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2><i class="fas fa-money-check-alt"></i> Retirer des fonds</h2>
+    <form method="post" action="{% url 'Monsite:retirer_fonds' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="montant">Montant à retirer :</label>
+            <input type="number" step="0.01" class="form-control" id="montant" name="montant" placeholder="Montant en XOF" required>
+        </div>
+        <button type="submit" class="btn btn-danger"><i class="fas fa-arrow-circle-left"></i> Retirer</button>
+    </form>
+</div>
+
+{% if message %}
+<div id="messages" class="alert alert-info mt-4">
+    {{ message }}
+</div>
+{% endif %}
+{% endblock %}

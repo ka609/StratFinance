@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Inviter des amis</h2>
+  <p>Invitez des amis et gagnez 5% par ami parrainé !</p>
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" value="{{ lien_invitation }}" readonly>
+    <button class="btn btn-primary" onclick="navigator.clipboard.writeText('{{ lien_invitation }}')">Copier le lien</button>
+  </div>
+</div>
+{% endblock %}

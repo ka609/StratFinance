@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Profil Utilisateur{% endblock %}
+
+{% block content %}
+<div class="card mx-auto mt-5" style="max-width: 500px;">
+    <div class="card-header bg-primary text-white">
+        <h4>Profil de {{ utilisateur.username }}</h4>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <strong>Nom d'utilisateur :</strong> {{ utilisateur.username }}
+            </li>
+            <li class="list-group-item">
+                <strong>Nom :</strong> {{ utilisateur.last_name }}
+            </li>
+            <li class="list-group-item">
+                <strong>Prénom :</strong> {{ utilisateur.first_name }}
+            </li>
+            <li class="list-group-item">
+                <strong>E-mail :</strong> {{ utilisateur.email }}
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

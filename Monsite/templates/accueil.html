@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2 class="text-center my-4">Niveaux d'Investissement</h2>
+
+  {% if message_motivation %}
+    <div class="alert alert-info text-center">
+      {{ message_motivation }}
+    </div>
+  {% endif %}
+
+  <div class="row">
+    {% for niveau_obj in niveaux_avec_gain_total %}
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body d-flex flex-column align-items-center text-center">
+            <div class="icon mb-3">
+              <!-- Utilisez Font Awesome ou une autre bibliothèque d'icônes ici -->
+              <i class="fas fa-chart-line fa-3x text-primary"></i>
+            </div>
+            <h5 class="card-title font-weight-bold text-dark">{{ niveau_obj.niveau.nom }}</h5>
+            <p class="card-text"><i class="fas fa-coins text-warning"></i> Montant : <strong>{{ niveau_obj.niveau.montant_min }} FCFA</strong></p>
+            <p class="card-text"><i class="fas fa-calendar-alt text-secondary"></i> Durée : <strong>{{ niveau_obj.niveau.duree }} jours</strong></p>
+            <p class="card-text"><i class="fas fa-percent text-info"></i> Gain quotidien : <strong>{{ niveau_obj.niveau.pourcentage_gain_journalier }}%</strong></p>
+            <p class="card-text"><i class="fas fa-hand-holding-usd text-success"></i> Gain Total : <strong>{{ niveau_obj.gain_total }} FCFA</strong></p>
+
+            {% if user.is_authenticated %}
+              {% if investissement_actuel and investissement_actuel.niveau == niveau_obj.niveau %}
+                <button class="btn btn-primary mt-auto" disabled>Niveau actuel</button>
+              {% else %}
+                <a href="{% url 'Monsite:activer_niveau' niveau_obj.niveau.id %}" class="btn btn-success mt-auto">Activer</a>
+              {% endif %}
+            {% else %}
+              <p class="text-muted mt-auto">Connectez-vous pour activer ce niveau</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

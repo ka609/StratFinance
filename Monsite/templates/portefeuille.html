@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <!-- Titre principal -->
+  <h2 class="text-primary mb-4">Portefeuille</h2>
+
+  <!-- Menu avec icônes en haut à gauche -->
+  <div class="dropdown mb-4">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="menuDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-bars"></i> Menu
+    </button>
+    <div class="dropdown-menu" aria-labelledby="menuDropdown">
+      <a class="dropdown-item" href="{% url 'Monsite:historique_transactions' %}">
+        <i class="fas fa-wallet"></i> Mes Transactions
+      </a>
+      <a class="dropdown-item" href="{% url 'Monsite:profil_utilisateur' %}">
+        <i class="fas fa-user"></i> Profil Utilisateur
+      </a>
+    </div>
+  </div>
+
+  <!-- Boutons Dépôt et Retrait -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <button class="btn btn-success w-100" onclick="window.location.href='{% url 'Monsite:deposer_fonds' %}'">
+        <i class="fas fa-arrow-circle-down"></i> Dépôt
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-warning w-100" onclick="window.location.href='{% url 'Monsite:retirer_fonds' %}'">
+        <i class="fas fa-arrow-circle-up"></i> Retrait
+      </button>
+    </div>
+  </div>
+
+  <!-- Section Solde, Gain du Jour, Réseau, Gain Réseau -->
+  <div class="card-deck">
+    <div class="card text-white bg-info mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-coins"></i> Solde</h5>
+        <p class="card-text">{{ solde }} FCFA</p>
+      </div>
+    </div>
+    <div class="card text-white bg-success mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-chart-line"></i> Gain du jour</h5>
+        <p class="card-text">{{ gain_journalier }} FCFA</p>
+      </div>
+    </div>
+    <div class="card text-white bg-primary mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-users"></i> Réseau</h5>
+        <p class="card-text">Nombre de parrains : {{ nombre_parrains }}</p>
+      </div>
+    </div>
+    <div class="card text-white bg-secondary mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-network-wired"></i> Gain Réseau</h5>
+        <p class="card-text">{{ gain_reseau }} FCFA</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton Profil Utilisateur -->
+  <div class="text-center">
+    <a href="{% url 'Monsite:profil_utilisateur' %}" class="btn btn-outline-dark">
+      <i class="fas fa-user-circle"></i> Profil Utilisateur
+    </a>
+  </div>
+</div>
+{% endblock %}

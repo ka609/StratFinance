@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div id="messages" class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle"></i> {{ message }}
+    </div>
+</div>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'Monsite:deposer_fonds' %}";
+    }, 3000);
+</script>
+{% endblock %}
